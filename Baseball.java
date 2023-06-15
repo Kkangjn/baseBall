@@ -9,10 +9,10 @@ public class Baseball {
             System.out.println("3~9 사이 값을 입력하세요!");
             System.out.print("숫자 입력 :");
             selectNum = sc.nextInt();
-            if(selectNum<3 || selectNum>9){
+            if (selectNum < 3 || selectNum > 9) {
                 System.out.println("범위를 초과했습니다.");
             }
-        }while(selectNum<3 || selectNum>9);
+        } while (selectNum < 3 || selectNum > 9);
 
         Random_Number randomNumber = new Random_Number(selectNum);
         ArrayList<Integer> computerNumList = randomNumber.createNum();
@@ -24,11 +24,11 @@ public class Baseball {
             User_Number userNumber = new User_Number(selectNum);
             ArrayList<Integer> userNumList = userNumber.inputNum();
 
-            System.out.println(tryNum+1 + "번째 시도: " + userNumList.toString());
+            System.out.println(tryNum + 1 + "번째 시도: " + userNumList.toString());
             Compare compareNum = new Compare();
             result = compareNum.compareNum(computerNumList, userNumList);
             tryNum++;
-        }while(!(Objects.equals(result, selectNum+"S")));
+        } while (!(Objects.equals(result, selectNum + "S")));
         System.out.println(tryNum + "번만에 맞히셨습니다!");
         System.out.println("게임을 종료합니다.");
 
@@ -198,3 +198,33 @@ public class Baseball {
 // - 1,2. 난수생성과 동일!
 // 4. class 비교하기 - method1 난수와 입력값 비교
 // - 1,2 난수생성과 동일!
+// 완성! -> 좀 아쉬움
+// main 은 앞단에서 필요한부분만(출력, 입력받기) 남겨두고싶음!
+
+//[송룸메] [오후 6:50] 이건 그냥 평범한 의견인데 system out 모아서 GameUiManager라고 클래스 빼보는건 어떰
+//[송룸메] [오후 6:51] .start()하면 시스템 주루룩 나오고 인풋 받고
+//.end()하면 스코어랑 게임종료 시스템 주루룩 나오고
+//[송룸메] [오후 6:51] 그러면 public간 데이터 이동이 어찌 되는지 감 잡힐듯
+//[송룸메] [오후 6:51] 그리고 지저분한 system out을 합칠 수 있음
+//[송룸메] [오후 6:55] 안내문 생성을 별도의 장소에서 독립적으로 함으로서 기획자한테 일을 넘길 수 있게 되는거임
+
+// x번째 시도 ; [0,1,2] -> 012 로 바꾸기
+//    public String toString() {
+//        Iterator<E> it = iterator();
+//        if (! it.hasNext())
+//            return "[]";
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append('[');
+//
+//        for (;;) {
+//            E e = it.next();
+//            sb.append(e == this ? "(this Collection)" : e);
+//            if (! it.hasNext())
+//                return sb.append(']').toString();
+//            sb.append(',').append(' ');
+//        }
+//    }
+// toString 을 오버라이드해서 리스트변수명.toString() -> 리스트의 값들을 , , , 나열하고 [] 감싸준다.([0,1,2]) -> []와 , 를 없애주려고 했으나 잘안됨
+// -> 어디가 잘안되는가? .toString() 매개변수가 없는데 어떻게 Arraylist의 인덱스를 조회하는가? -> 생성할때 리스트를 저장하는 부분이 있을거다 -> 생성자를 못찾겠음
+// ->
